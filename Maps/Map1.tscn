@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://udfu6vi57x5y"]
+
+[ext_resource type="Script" path="res://Maps/Map.gd" id="1_j2ekp"]
+[ext_resource type="PackedScene" uid="uid://bn5qykttw2lvl" path="res://Maps/Map1Body.tscn" id="2_ir0gv"]
+
+[sub_resource type="Curve3D" id="Curve3D_8tfnb"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 29.1668, 0.494375, -32.2332, 1.56887, 0, -1.42625, -1.56887, 0, 1.42625, 28.311, 0.494375, 27.5266, 1.28362, 0, 1.99675, -1.28362, 0, -1.99675, 1.06969, 0.494375, 27.384, 2.13937, 0, 1.28362, -2.13937, 0, -1.28362, -0.213938, 0.494375, -27.5266, 1.85412, 0, -1.85411, -1.85412, 0, 1.85411, -27.17, 0.494375, -27.0987, 0, 0, 0, 0, 0, 0, -28.1684, 0.494375, 32.3758),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0)
+}
+point_count = 6
+
+[node name="Map" type="Node3D"]
+script = ExtResource("1_j2ekp")
+
+[node name="MapBody" parent="." instance=ExtResource("2_ir0gv")]
+
+[node name="Path3D" type="Path3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 4.50653, 0)
+curve = SubResource("Curve3D_8tfnb")
+
+[node name="SpawnTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

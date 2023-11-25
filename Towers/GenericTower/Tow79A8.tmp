@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3 uid="uid://c0lmwxabb7r68"]
+
+[ext_resource type="Script" path="res://Towers/Tower/GenericTower.gd" id="1_kpg7m"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_xowfp"]
+size = Vector3(3, 7, 3)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_4bm3e"]
+data = PackedVector3Array(-1.5, 3.5, 1.5, 1.5, 3.5, 1.5, -1.5, -3.5, 1.5, 1.5, 3.5, 1.5, 1.5, -3.5, 1.5, -1.5, -3.5, 1.5, 1.5, 3.5, -1.5, -1.5, 3.5, -1.5, 1.5, -3.5, -1.5, -1.5, 3.5, -1.5, -1.5, -3.5, -1.5, 1.5, -3.5, -1.5, 1.5, 3.5, 1.5, 1.5, 3.5, -1.5, 1.5, -3.5, 1.5, 1.5, 3.5, -1.5, 1.5, -3.5, -1.5, 1.5, -3.5, 1.5, -1.5, 3.5, -1.5, -1.5, 3.5, 1.5, -1.5, -3.5, -1.5, -1.5, 3.5, 1.5, -1.5, -3.5, 1.5, -1.5, -3.5, -1.5, 1.5, 3.5, 1.5, -1.5, 3.5, 1.5, 1.5, 3.5, -1.5, -1.5, 3.5, 1.5, -1.5, 3.5, -1.5, 1.5, 3.5, -1.5, -1.5, -3.5, 1.5, 1.5, -3.5, 1.5, -1.5, -3.5, -1.5, 1.5, -3.5, 1.5, 1.5, -3.5, -1.5, -1.5, -3.5, -1.5)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_6ls0i"]
+height = 30.0
+radius = 30.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yiefx"]
+blend_mode = 1
+shading_mode = 0
+albedo_color = Color(0, 0.713726, 0.835294, 1)
+
+[sub_resource type="TorusMesh" id="TorusMesh_rdr8n"]
+material = SubResource("StandardMaterial3D_yiefx")
+inner_radius = 32.5
+outer_radius = 33.0
+
+[node name="GenericTower" type="Area3D"]
+script = ExtResource("1_kpg7m")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.33012, 0)
+mesh = SubResource("BoxMesh_xowfp")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.33012, 0)
+shape = SubResource("ConcavePolygonShape3D_4bm3e")
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.11121, 0)
+
+[node name="Attackrange" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Attackrange"]
+shape = SubResource("CylinderShape3D_6ls0i")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Attackrange"]
+mesh = SubResource("TorusMesh_rdr8n")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[connection signal="area_entered" from="Attackrange" to="." method="_on_attackrange_area_entered"]
+[connection signal="area_exited" from="Attackrange" to="." method="_on_attackrange_area_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
