@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://8jpw3bb22d1a"]
 
-[ext_resource type="Script" path="res://Controller.gd" id="1_bunfg"]
+[ext_resource type="Script" path="res://Controller/Controller.gd" id="1_727yo"]
 [ext_resource type="Material" uid="uid://w5bpv2isrgyi" path="res://ToonShader.tres" id="2_bgck1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y4hfd"]
@@ -47,7 +47,7 @@ radius = 0.1
 
 [node name="Controller" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 35, 30)
-script = ExtResource("1_bunfg")
+script = ExtResource("1_727yo")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 0, 0)
@@ -59,7 +59,7 @@ target_position = Vector3(0, 0, -200)
 [node name="Area3D" type="Area3D" parent="."]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
 cast_shadow = 0
 mesh = SubResource("TorusMesh_pyhin")
 skeleton = NodePath("../../..")

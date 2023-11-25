@@ -1,5 +1,8 @@
 extends "res://Towers/Tower.gd"
 
+var abilities_singleton = preload("res://Towers/Abilities.gd")
+var abilities
+
 var projectile_scene = preload("res://Towers/Projectiles/Fireball/FireballProjectile.tscn")
 
 var projectile_speed = 40 # projectile speed
@@ -16,25 +19,15 @@ func _ready():
 
 	$Timer.start(attack_speed)
 
+	# instance abilities singleton
+	abilities = abilities_singleton.new()
+	add_child(abilities)
+
 func _on_timer_timeout():
 		if is_instance_valid(target):
-			shoot_fireball()
-			#shoot_volley()
-
-func shoot_volley():
-	for i in [-20, -10, 0, 10, 20]:
-		shoot_fireball((target.global_position - $Marker3D.global_position).normalized().rotated(Vector3.UP, deg_to_rad(i)))
-
-func shoot_fireball(target_direction = null):
-	var projectile_instance = projectile_scene.instantiate()
-	projectile_instance.pos = $Marker3D.global_position
-	projectile_instance.damage = damage
-	projectile_instance.speed = projectile_speed
-	if target_direction:
-		projectile_instance.target_direction = target_direction
-	else:
-		projectile_instance.target = target
-	get_parent().add_child(projectile_instance)
+			abilities.shoot_projectile_fixed(projectile_scene, damage, projectile_speed, $Marker3D.global_position, target)
+			#abilities.shoot_projectile_directional(projectile_scene, damage, projectile_speed, $Marker3D.global_position, (target.global_position - $Marker3D.global_position).normalized())
+			#abilities.shoot_volley(projectile_scene, damage, projectile_speed, $Marker3D.global_position, (target.global_position - $Marker3D.global_position).normalized(), [-20, -10, 0, 10, 20])
 
 func _on_attackrange_area_entered(area):
 	attackRangeAreaEntered(area)

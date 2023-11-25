@@ -1,5 +1,8 @@
 extends "res://Towers/Tower.gd"
 
+var abilities_singleton = preload("res://Towers/Abilities.gd")
+var abilities
+
 var projectile_scene = preload("res://Towers/Projectiles/Ice/IceProjectile.tscn")
 
 var projectile_speed = 40 # projectile speed
@@ -17,10 +20,15 @@ func _ready():
 		damages_per_level = [25, 50, 75, 100]
 		damage = damages_per_level[current_level - 1]
 
-	# $Timer.start(attack_speed)
+	$Timer.start(attack_speed)
+
+	# instance abilities singleton
+	abilities = abilities_singleton.new()
+	add_child(abilities)
 
 func _on_timer_timeout():
 		if is_instance_valid(target):
+			abilities.shoot_projectile_fixed(projectile_scene, damage, projectile_speed, $Marker3D.global_position, target)
 			var projectile_instance = projectile_scene.instantiate()
 			projectile_instance.pos = $Marker3D.global_position
 			projectile_instance.damage = damage
