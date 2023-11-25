@@ -28,7 +28,6 @@ func _ready():
 
 func _on_timer_timeout():
 		if is_instance_valid(target):
-			abilities.shoot_projectile_fixed(projectile_scene, damage, projectile_speed, $Marker3D.global_position, target)
 			var projectile_instance = projectile_scene.instantiate()
 			projectile_instance.pos = $Marker3D.global_position
 			projectile_instance.damage = damage
