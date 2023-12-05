@@ -4,7 +4,6 @@ var pos
 
 var target
 var is_aware = false
-var can_attack = true
 
 var current_level = 0
 var damage = 0
@@ -23,7 +22,7 @@ func get_new_target():
 	var current_target = null
 	var target_min_length = 0
 
-	for area in $Attackrange.get_overlapping_areas():
+	for area in $AttackRange.get_overlapping_areas():
 		if area.is_in_group('enemy') and area != target:
 			if !current_target or (area.global_position - self.global_position).length() < target_min_length:
 				current_target = area

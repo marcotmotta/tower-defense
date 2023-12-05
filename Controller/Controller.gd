@@ -1,8 +1,10 @@
 extends Node3D
 
 var generic_tower_scene = preload("res://Towers/GenericTower/GenericTower.tscn")
+var arrow_tower_scene = preload("res://Towers/ArrowTower/ArrowTower.tscn")
 var fire_tower_scene = preload("res://Towers/FireTower/FireTower.tscn")
 var ice_tower_scene = preload("res://Towers/IceTower/IceTower.tscn")
+var void_tower_scene = preload("res://Towers/VoidTower/VoidTower.tscn")
 
 const CAMERA_SPEED = 0.7
 const MAX_HEIGHT = 45
@@ -37,8 +39,10 @@ func _process(delta):
 	# gold ui
 	$CanvasLayer/Control/Gold.text = 'GOLD: ' + str(Globals.gold)
 
+	$CanvasLayer/Control/ArrowTower.disabled = Globals.gold < Globals.arrow_tower_cost
 	$CanvasLayer/Control/FireTower.disabled = Globals.gold < Globals.fire_tower_cost
 	$CanvasLayer/Control/IceTower.disabled = Globals.gold < Globals.ice_tower_cost
+	$CanvasLayer/Control/VoidTower.disabled = Globals.gold < Globals.void_tower_cost
 
 	# towers ui
 	$CanvasLayer/Control/SelectedTower.text = "SELECTED TOWER: " + str(selected_tower)
@@ -124,6 +128,10 @@ func spawn_tower(tower_type, cost):
 func _on_area_3d_area_entered(area):
 	print(area)
 
+func _on_arrow_tower_pressed():
+	selected_tower = arrow_tower_scene
+	selected_tower_cost = Globals.arrow_tower_cost
+
 func _on_fire_tower_pressed():
 	selected_tower = fire_tower_scene
 	selected_tower_cost = Globals.fire_tower_cost
@@ -131,6 +139,10 @@ func _on_fire_tower_pressed():
 func _on_ice_tower_pressed():
 	selected_tower = ice_tower_scene
 	selected_tower_cost = Globals.ice_tower_cost
+
+func _on_void_tower_pressed():
+	selected_tower = void_tower_scene
+	selected_tower_cost = Globals.void_tower_cost
 
 func _on_next_wave_pressed():
 	var map = get_parent().get_node('Map')

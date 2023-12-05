@@ -1,42 +1,21 @@
-[gd_scene load_steps=6 format=3 uid="uid://cafg2mhfdviwx"]
+[gd_scene load_steps=4 format=3 uid="uid://p417h7ae0amq"]
 
-[ext_resource type="Script" path="res://Towers/Projectiles/Fireball/FireballProjectile.gd" id="1_vfua1"]
+[ext_resource type="Script" path="res://Towers/Projectiles/Arrow/ArrowProjectile.gd" id="1_mord2"]
+[ext_resource type="PackedScene" uid="uid://c1tcynqmon2px" path="res://Towers/Projectiles/Arrow/ArrowMesh.tscn" id="1_nc8r0"]
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_71254"]
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_dxqpq"]
 points = PackedVector3Array(0.980344, 0.183469, 0.0315765, -0.977477, -0.183355, -0.0904639, -0.942976, -0.274012, -0.181475, 0.152638, -0.666639, 0.728356, -0.211037, 0.78831, 0.576929, 0.184627, -0.0915623, -0.976969, -0.180659, 0.817713, -0.543999, 0.243737, -0.909689, -0.332273, -0.121109, 0.152902, 0.979443, -0.542369, -0.724769, 0.423657, 0.604588, 0.724305, -0.330643, 0.634171, 0.391896, 0.664077, -0.879055, 0.30349, 0.365178, -0.542663, -0.422869, -0.723919, 0.852268, -0.51673, 0.0618464, -0.724288, 0.332336, -0.603236, 0.760092, -0.121365, -0.636416, 0.638071, -0.242667, 0.728959, -0.394561, 0.913095, -0.090039, 0.365549, 0.911196, 0.18319, -0.394563, -0.913101, -0.0900396, -0.604357, -0.242246, 0.757853, 0.213378, 0.424522, -0.878365, 0.274246, -0.910695, 0.304605, 0.152873, -0.667673, -0.727284, -0.332904, 0.24293, -0.909566, -0.81657, 0.545227, -0.18048, -0.66277, 0.513033, 0.544283, 0.604588, -0.724305, -0.330643, 0.243867, 0.637198, 0.72921, 0.72941, 0.637067, 0.243636, 0.154338, -0.0917767, 0.981459)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4ak2q"]
-blend_mode = 1
-shading_mode = 0
-albedo_color = Color(1, 0.290196, 0, 1)
+[node name="ArrowProjectile" type="Area3D"]
+script = ExtResource("1_mord2")
 
-[sub_resource type="SphereMesh" id="SphereMesh_gwpja"]
-material = SubResource("StandardMaterial3D_4ak2q")
-radius = 0.75
-height = 1.5
-
-[sub_resource type="Curve" id="Curve_f3as4"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[node name="FireballProjectile" type="Area3D"]
-script = ExtResource("1_vfua1")
+[node name="ArrowMesh" parent="." instance=ExtResource("1_nc8r0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.89273)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("ConvexPolygonShape3D_71254")
-
-[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
-amount = 50
-lifetime = 0.5
-speed_scale = 2.0
-mesh = SubResource("SphereMesh_gwpja")
-emission_shape = 1
-emission_sphere_radius = 1.0
-gravity = Vector3(0, 0, 0)
-scale_amount_curve = SubResource("Curve_f3as4")
+shape = SubResource("ConvexPolygonShape3D_dxqpq")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-light_color = Color(1, 0.501961, 0, 1)
 light_energy = 2.0
 omni_range = 8.0
 

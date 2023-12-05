@@ -2,6 +2,9 @@ extends Area3D
 
 var pos
 
+# tower that shot the projectile
+var caster
+
 # in case the target is an enemy or a position:
 var target
 var target_direction
@@ -15,8 +18,10 @@ func _process(delta):
 	if is_instance_valid(target):
 		var direction = (target.global_position - global_position).normalized()
 		global_position += direction * speed * delta
+		look_at(target.global_position)
 	elif target_direction:
 		global_position += target_direction * speed * delta
+		look_at(global_position + target_direction)
 	else:
 		free_projectile()
 

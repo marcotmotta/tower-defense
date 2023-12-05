@@ -6,11 +6,11 @@
 [ext_resource type="PackedScene" uid="uid://drd43xqpoik5o" path="res://Towers/FireTower/Fire3Mesh.tscn" id="4_hlrdn"]
 [ext_resource type="PackedScene" uid="uid://dxkqmrjpotyqw" path="res://Towers/FireTower/Fire4Mesh.tscn" id="5_2u7n1"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y078n"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s1ad3"]
 albedo_color = Color(1, 0, 0.0156863, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_yotpe"]
-material = SubResource("StandardMaterial3D_y078n")
+material = SubResource("StandardMaterial3D_s1ad3")
 size = Vector3(3, 7, 3)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_xpq21"]
@@ -21,13 +21,13 @@ radius = 2.5
 height = 30.0
 radius = 30.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sppfk"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0p0an"]
 blend_mode = 1
 shading_mode = 0
 albedo_color = Color(0, 0.713726, 0.835294, 1)
 
 [sub_resource type="TorusMesh" id="TorusMesh_vyx8i"]
-material = SubResource("StandardMaterial3D_sppfk")
+material = SubResource("StandardMaterial3D_0p0an")
 inner_radius = 29.0
 outer_radius = 30.0
 
@@ -62,12 +62,12 @@ shape = SubResource("CylinderShape3D_xpq21")
 [node name="Marker3D" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.94758, 0)
 
-[node name="Attackrange" type="Area3D" parent="."]
+[node name="AttackRange" type="Area3D" parent="."]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Attackrange"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AttackRange"]
 shape = SubResource("CylinderShape3D_2p8ii")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Attackrange"]
+[node name="AreaMesh" type="MeshInstance3D" parent="AttackRange"]
 visible = false
 mesh = SubResource("TorusMesh_vyx8i")
 
@@ -77,6 +77,6 @@ mesh = SubResource("TorusMesh_vyx8i")
 visible = false
 mesh = SubResource("TorusMesh_203y3")
 
-[connection signal="area_entered" from="Attackrange" to="." method="_on_attackrange_area_entered"]
-[connection signal="area_exited" from="Attackrange" to="." method="_on_attackrange_area_exited"]
+[connection signal="area_entered" from="AttackRange" to="." method="_on_attackrange_area_entered"]
+[connection signal="area_exited" from="AttackRange" to="." method="_on_attackrange_area_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -13,8 +13,10 @@ var spawned_all_enemies = true
 
 var gold = 0
 
+const arrow_tower_cost = 10
 const fire_tower_cost = 10
 const ice_tower_cost = 20
+const void_tower_cost = 10
 
 var highlighted_tower = null
 
@@ -50,11 +52,13 @@ func enemy_killed() -> void:
 func reset_highlight() -> void:
 	if highlighted_tower:
 		highlighted_tower.get_node('Highlight').visible = false
+		highlighted_tower.get_node('AttackRange').get_node('AreaMesh').visible = false
 	highlighted_tower = null
 
 func highlight_tower(tower: Area3D) -> void:
 	highlighted_tower = tower
 	tower.get_node('Highlight').visible = true
+	tower.get_node('AttackRange').get_node('AreaMesh').visible = true
 
 # test
 func _unhandled_input(event):

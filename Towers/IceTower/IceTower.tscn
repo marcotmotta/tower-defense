@@ -50,12 +50,12 @@ shape = SubResource("CylinderShape3D_dun5w")
 [node name="Marker3D" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.54857, 0)
 
-[node name="Attackrange" type="Area3D" parent="."]
+[node name="AttackRange" type="Area3D" parent="."]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Attackrange"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AttackRange"]
 shape = SubResource("CylinderShape3D_oaojn")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Attackrange"]
+[node name="AreaMesh" type="MeshInstance3D" parent="AttackRange"]
 visible = false
 mesh = SubResource("TorusMesh_knahp")
 
@@ -66,6 +66,6 @@ autostart = true
 visible = false
 mesh = SubResource("TorusMesh_51bso")
 
-[connection signal="area_entered" from="Attackrange" to="." method="_on_attackrange_area_entered"]
-[connection signal="area_exited" from="Attackrange" to="." method="_on_attackrange_area_exited"]
+[connection signal="area_entered" from="AttackRange" to="." method="_on_attackrange_area_entered"]
+[connection signal="area_exited" from="AttackRange" to="." method="_on_attackrange_area_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

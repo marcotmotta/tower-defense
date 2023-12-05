@@ -1,0 +1,116 @@
+[gd_scene load_steps=12 format=3 uid="uid://biyryuv2065bw"]
+
+[ext_resource type="Script" path="res://Towers/Projectiles/Void/VoidAbility.gd" id="1_tp3n2"]
+[ext_resource type="Shader" path="res://Towers/Projectiles/Void/raymarch_portal.gdshader" id="2_syyjq"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_8b5l4"]
+top_radius = 10.0
+bottom_radius = 10.0
+height = 6.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5anpm"]
+render_priority = 0
+shader = ExtResource("2_syyjq")
+shader_parameter/col_distance_scale = 20.0
+shader_parameter/col_near = Color(1, 0, 1, 1)
+shader_parameter/col_far = Color(0, 0, 0, 1)
+shader_parameter/emission_boost = 5.0
+shader_parameter/sphere_radius = 0.1
+shader_parameter/noise_scale = 3.5
+shader_parameter/detail = 6
+shader_parameter/rough = 0.5
+shader_parameter/inflate = 0.1
+shader_parameter/smooth_fac = 1.0
+shader_parameter/step_mult = 0.3
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_57x6k"]
+points = PackedVector3Array(1.78942, 3, 9.54734, -1.81035, -3, -9.6489, -3.0141, -3, -9.3485, 3.01599, -3, 9.3485, 9.2519, 3, -2.98366, -9.54921, 3, -1.78907, -8.44326, -3, 5.1258, 9.65079, -3, 1.80811, -1.79129, 3, -9.54734, 6.03198, -3, -7.8408, -5.96849, 3, 7.75826, 7.75978, 3, 5.96732, -8.44326, -3, -5.1258, -3.0141, -3, 9.3485, 3.87802, 3, -8.95098, -5.96849, 3, -7.75826, 9.04797, -3, -3.9204, -8.95273, 3, 3.87913, -9.65079, -3, 1.80811, 6.03198, -3, 7.8408, 7.75978, 3, -5.96732, 9.54921, 3, 1.78907, 1.80846, -3, -9.6489, -1.79129, 3, 9.54734, 5.07284, 3, 8.35649, 8.44515, -3, 5.1258, -8.35439, 3, -5.07185, -6.03198, -3, 7.8408, -6.03198, -3, -7.8408, -9.65079, -3, -1.80811, 9.65079, -3, -1.80811, 1.80846, -3, 9.6489)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ccftr"]
+albedo_color = Color(0.160784, 0.160784, 0.160784, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_kqvf6"]
+material = SubResource("StandardMaterial3D_ccftr")
+size = Vector2(200, 200)
+
+[sub_resource type="Animation" id="Animation_cbbdh"]
+resource_name = "spawn"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:surface_material_override/0:shader_parameter/smooth_fac")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.2, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_11uyv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:surface_material_override/0:shader_parameter/smooth_fac")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_fvxpt"]
+resource_name = "end"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:surface_material_override/0:shader_parameter/smooth_fac")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8v4ni"]
+_data = {
+"RESET": SubResource("Animation_11uyv"),
+"end": SubResource("Animation_fvxpt"),
+"spawn": SubResource("Animation_cbbdh")
+}
+
+[node name="VoidAbility" type="Area3D"]
+script = ExtResource("1_tp3n2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, 0, 0, 0)
+mesh = SubResource("CylinderMesh_8b5l4")
+surface_material_override/0 = SubResource("ShaderMaterial_5anpm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_57x6k")
+
+[node name="CdTimer" type="Timer" parent="."]
+
+[node name="ExpirationTimer" type="Timer" parent="."]
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("PlaneMesh_kqvf6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_8v4ni")
+}
+
+[connection signal="timeout" from="CdTimer" to="." method="_on_cd_timer_timeout"]
+[connection signal="timeout" from="ExpirationTimer" to="." method="_on_expiration_timer_timeout"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

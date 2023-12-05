@@ -105,13 +105,21 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
+[node name="ArrowTower" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 191.0
+offset_top = 531.0
+offset_right = 350.0
+offset_bottom = 562.0
+text = "ARROW TOWER $10"
+
 [node name="FireTower" type="Button" parent="CanvasLayer/Control"]
 layout_mode = 0
 offset_left = 39.0
 offset_top = 577.0
 offset_right = 140.0
 offset_bottom = 608.0
-text = "FIRE TOWER $15"
+text = "FIRE TOWER $10"
 
 [node name="IceTower" type="Button" parent="CanvasLayer/Control"]
 layout_mode = 0
@@ -120,6 +128,14 @@ offset_top = 576.0
 offset_right = 313.0
 offset_bottom = 607.0
 text = "ICE TOWER $20"
+
+[node name="VoidTower" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 330.0
+offset_top = 575.0
+offset_right = 469.0
+offset_bottom = 606.0
+text = "VOID TOWER $10"
 
 [node name="NextWave" type="Button" parent="CanvasLayer/Control"]
 layout_mode = 0
@@ -163,6 +179,8 @@ offset_bottom = 604.0
 text = "HIGHLIGHTED TOWER"
 
 [connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
+[connection signal="pressed" from="CanvasLayer/Control/ArrowTower" to="." method="_on_arrow_tower_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/FireTower" to="." method="_on_fire_tower_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/IceTower" to="." method="_on_ice_tower_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/VoidTower" to="." method="_on_void_tower_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/NextWave" to="." method="_on_next_wave_pressed"]
