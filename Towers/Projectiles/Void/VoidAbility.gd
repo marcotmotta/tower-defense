@@ -11,12 +11,13 @@ func _ready():
 	if target_pos:
 		global_position = target_pos
 
+	# make mesh and material unique
 	var new_res = $MeshInstance3D.mesh.duplicate()
 	$MeshInstance3D.mesh = new_res
-
 	var new_material = $MeshInstance3D.get_surface_override_material(0).duplicate()
 	$MeshInstance3D.set_surface_override_material(0,new_material)
 
+	#start timers for cd and expiration
 	$CdTimer.start(cd_time)
 	$ExpirationTimer.start(expiration_time)
 

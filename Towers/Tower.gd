@@ -9,6 +9,8 @@ var current_level = 0
 var damage = 0
 var levels = []
 var damages_per_level = []
+var crit_chance_per_level = [] # in decimals (1.0 = 100% chance)
+var crit_modifier_per_level = [] # (2 = 200% damage)
 
 func attackRangeAreaEntered(area):
 	if area.is_in_group('enemy') and !is_instance_valid(target):
@@ -36,3 +38,9 @@ func upgrade():
 		get_node(levels[current_level - 2]).visible = false
 		get_node(levels[current_level - 1]).visible = true
 		damage = damages_per_level[current_level - 1]
+
+func calculate_crit(damage: float, crit_chance: float, crit_modifier: float) -> float:
+	var rand_number = randf_range(0.0, 1.0)
+	if rand_number <= crit_chance:
+		return damage * crit_modifier
+	return damage

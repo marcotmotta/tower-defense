@@ -84,7 +84,7 @@ data = PackedVector3Array(-50, -5, -35.7143, -50, 5, -50, -50, 5, -35.7143, -50,
 [sub_resource type="PlaneMesh" id="PlaneMesh_sjx43"]
 size = Vector2(150, 150)
 
-[sub_resource type="Resource" id="Resource_muukf"]
+[sub_resource type="Resource" id="Resource_81ao3"]
 script = ExtResource("3_viqwg")
 amount = 131072
 enabled = true
@@ -93,7 +93,7 @@ custom_seed = 0
 restrict_height = true
 reference_frame = 1
 
-[sub_resource type="Resource" id="Resource_n35j0"]
+[sub_resource type="Resource" id="Resource_kesxb"]
 script = ExtResource("4_kgw1y")
 position = Vector3(0, 0, 0)
 rotation = Vector3(0, 90, 0)
@@ -104,7 +104,7 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 2
 
-[sub_resource type="Resource" id="Resource_nnucx"]
+[sub_resource type="Resource" id="Resource_bx2iu"]
 script = ExtResource("5_4do6c")
 ray_direction = Vector3(0, -1, 0)
 ray_length = 5.0
@@ -120,7 +120,7 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_y15ba"]
+[sub_resource type="Resource" id="Resource_gagtc"]
 script = ExtResource("6_wa51x")
 operation = 0
 rotation = Vector3(0, 0, -90)
@@ -130,7 +130,7 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 2
 
-[sub_resource type="Resource" id="Resource_ltxuk"]
+[sub_resource type="Resource" id="Resource_a32cu"]
 script = ExtResource("7_qwx4b")
 operation = 0
 position = Vector3(-1, 0, 0)
@@ -140,9 +140,9 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 2
 
-[sub_resource type="Resource" id="Resource_1ehvk"]
+[sub_resource type="Resource" id="Resource_w28n4"]
 script = ExtResource("2_pbgus")
-stack = Array[Resource("res://addons/proton_scatter/src/modifiers/base_modifier.gd")]([SubResource("Resource_muukf"), SubResource("Resource_n35j0"), SubResource("Resource_nnucx"), SubResource("Resource_y15ba"), SubResource("Resource_ltxuk")])
+stack = Array[Resource("res://addons/proton_scatter/src/modifiers/base_modifier.gd")]([SubResource("Resource_81ao3"), SubResource("Resource_kesxb"), SubResource("Resource_bx2iu"), SubResource("Resource_gagtc"), SubResource("Resource_a32cu")])
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kc1e2"]
 render_priority = 0
@@ -188,7 +188,7 @@ mesh = SubResource("PlaneMesh_sjx43")
 [node name="ProtonScatter" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 0)
 script = ExtResource("1_rm2ve")
-modifier_stack = SubResource("Resource_1ehvk")
+modifier_stack = SubResource("Resource_w28n4")
 Performance/use_chunks = true
 Performance/chunk_dimensions = Vector3(15, 15, 15)
 

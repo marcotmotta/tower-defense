@@ -37,10 +37,6 @@ func _process(delta: float) -> void:
 func current_enemy_health() -> int:
 	return current_wave * 100 + ((current_wave - 1) * 25)
 
-func choose(array: Array) -> Variant:
-	array.shuffle()
-	return array.front()
-
 func enemy_killed() -> void:
 	spawned_enemies -= 1
 	gold += 1
@@ -59,6 +55,11 @@ func highlight_tower(tower: Area3D) -> void:
 	highlighted_tower = tower
 	tower.get_node('Highlight').visible = true
 	tower.get_node('AttackRange').get_node('AreaMesh').visible = true
+
+# utils
+func choose(array: Array) -> Variant:
+	array.shuffle()
+	return array.front()
 
 # test
 func _unhandled_input(event):
