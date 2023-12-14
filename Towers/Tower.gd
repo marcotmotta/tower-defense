@@ -12,15 +12,15 @@ var damages_per_level = []
 var crit_chance_per_level = [] # in decimals (1.0 = 100% chance)
 var crit_modifier_per_level = [] # (2 = 200% damage)
 
-func attackRangeAreaEntered(area):
+func attackRangeAreaEntered(area: Area3D) -> void:
 	if area.is_in_group('enemy') and !is_instance_valid(target):
 		target = get_new_target()
 
-func attackRangeAreaExited(area):
+func attackRangeAreaExited(area: Area3D) -> void:
 	if area.is_in_group('enemy') and (area == target or !is_instance_valid(target)):
 		target = get_new_target()
 
-func get_new_target():
+func get_new_target() -> Variant:
 	var current_target = null
 	var target_min_length = 0
 
@@ -32,7 +32,7 @@ func get_new_target():
 
 	return current_target
 
-func upgrade():
+func upgrade() -> void:
 	if levels.size() > current_level:
 		current_level += 1
 		get_node(levels[current_level - 2]).visible = false
