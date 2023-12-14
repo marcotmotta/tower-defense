@@ -25,7 +25,7 @@ func reset() -> void:
 	enemies_per_wave = 10
 	spawn_enemy_count = 0
 
-	gold = 10
+	gold = 20
 
 func _ready() -> void:
 	randomize()

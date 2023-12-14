@@ -8,9 +8,9 @@ var is_dead = false
 func _ready():
 	health = max_health
 
+	# unique mesh and material
 	var new_res = $Healthbar.mesh.duplicate()
 	$Healthbar.mesh = new_res
-
 	var new_material = $Healthbar.mesh.material.duplicate()
 	$Healthbar.mesh.material = new_material
 
@@ -18,9 +18,11 @@ func _process(delta):
 	$Healthbar.mesh.size.x = float(health) * 3.0 / float(max_health)
 
 	if get_parent().slow_amount:
-		$Healthbar.mesh.material.albedo_color = '00bac5'
+		#$Healthbar.mesh.material.albedo_color = '00bac5'
+		$SlowEffect.emitting = true
 	else:
-		$Healthbar.mesh.material.albedo_color = 'a80000'
+		#$Healthbar.mesh.material.albedo_color = 'a80000'
+		$SlowEffect.emitting = false
 
 func take_damage(dmg):
 	health -= dmg

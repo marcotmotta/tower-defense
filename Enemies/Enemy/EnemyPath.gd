@@ -2,9 +2,10 @@ extends PathFollow3D
 
 # fast: 0.2
 # normal: 0.15
-#slow: 0.1
+# slow: 0.1
 var speed = 0.15
 
+# define if its slowed and its amount
 var slow_amount = null
 
 func _process(delta):
