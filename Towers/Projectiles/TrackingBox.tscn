@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cdywp0shphgfc"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_5xrlf"]
+height = 50.0
+radius = 30.0
+
+[node name="TrackingBox" type="Area3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_5xrlf")

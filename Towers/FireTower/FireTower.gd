@@ -5,7 +5,7 @@ var abilities
 
 var projectile_scene = preload("res://Towers/Projectiles/Fireball/FireballProjectile.tscn")
 
-var projectile_speed = 40 # projectile speed
+var projectile_speed = 20 # projectile speed
 var attack_speed = Globals.NORMAL # in seconds
 
 func _ready():
@@ -25,7 +25,8 @@ func _ready():
 
 func _on_timer_timeout():
 		if is_instance_valid(target):
-			abilities.shoot_projectile_fixed(projectile_scene, self, damage, projectile_speed, $Marker3D.global_position, target)
+			abilities.shoot_volley_delay_tracking(projectile_scene, self, damage, projectile_speed, $Marker3D.global_position, 6)
+			#abilities.shoot_projectile_fixed(projectile_scene, self, damage, projectile_speed, $Marker3D.global_position, target)
 			#abilities.shoot_projectile_directional(projectile_scene, self, damage, projectile_speed, $Marker3D.global_position, (target.global_position - $Marker3D.global_position).normalized())
 			#abilities.shoot_volley(projectile_scene, self, damage, projectile_speed, $Marker3D.global_position, (target.global_position - $Marker3D.global_position).normalized(), [-20, -10, 0, 10, 20])
 
